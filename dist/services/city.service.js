@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const city_entity_1 = require("../entities/city.entity");
+const swagger_1 = require("@nestjs/swagger");
 let CityService = class CityService {
     constructor(cityRepository) {
         this.cityRepository = cityRepository;
@@ -26,6 +27,20 @@ let CityService = class CityService {
     }
 };
 exports.CityService = CityService;
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Fetch all cities',
+        description: 'Returns a list of all cities in the database.',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'List of cities retrieved successfully.',
+        type: [city_entity_1.City],
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CityService.prototype, "getAllCities", null);
 exports.CityService = CityService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(city_entity_1.City)),

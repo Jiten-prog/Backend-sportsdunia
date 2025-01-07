@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateController = void 0;
 const common_1 = require("@nestjs/common");
 const state_service_1 = require("../services/state.service");
+const swagger_1 = require("@nestjs/swagger");
+const state_entity_1 = require("../entities/state.entity");
 let StateController = class StateController {
     constructor(stateService) {
         this.stateService = stateService;
@@ -23,11 +25,24 @@ let StateController = class StateController {
 exports.StateController = StateController;
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get all states',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'List of all states retrieved successfully',
+        type: [state_entity_1.State],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'Internal server error',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], StateController.prototype, "getStates", null);
 exports.StateController = StateController = __decorate([
+    (0, swagger_1.ApiTags)('States'),
     (0, common_1.Controller)('states'),
     __metadata("design:paramtypes", [state_service_1.StateService])
 ], StateController);

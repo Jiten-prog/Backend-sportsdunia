@@ -1,3 +1,4 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { College } from './entities/college.entity';
@@ -11,19 +12,21 @@ import { CollegeWiseCourseController } from './controllers/college-wise-course.c
 import { CollegeService } from './services/college.service';
 import { CollegePlacementService } from './services/college-placement.service';
 import { CollegeWiseCourseService } from './services/college-wise-course.service';
-import * as dotenv from 'dotenv';
-dotenv.config();  // Load the environment variables from .env file
+import { SwaggerModule } from './swagger.module';  // Import SwaggerModule
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      url: process.env.DATABASE_URL,  // Your DATABASE_URL from .env
-      ssl: true,  // Always enable SSL
+      url: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,  // Required for some hosted DB services
+      },
       entities: [College, CollegePlacement, CollegeWiseCourse, City, State],
-      synchronize: false,  // Be careful with synchronize, don't use it in production
+      synchronize: false,
     }),
     TypeOrmModule.forFeature([College, CollegePlacement, CollegeWiseCourse, City, State]),
+    SwaggerModule,  // Add SwaggerModule to imports
   ],
   controllers: [
     CollegeController,
@@ -36,8 +39,4 @@ dotenv.config();  // Load the environment variables from .env file
     CollegeWiseCourseService,
   ],
 })
-export class AppModule {
-  constructor() {
-    console.log('Database URL:', process.env.DATABASE_URL);  // Log to verify the database URL
-  }
-}
+export class AppModule {}

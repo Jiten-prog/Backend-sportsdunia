@@ -9,25 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.State = void 0;
-const typeorm_1 = require("typeorm");
-const college_entity_1 = require("./college.entity");
-let State = class State {
+exports.ApiController = void 0;
+const common_1 = require("@nestjs/common");
+let ApiController = class ApiController {
+    getApiStatus() {
+        return 'API is working!';
+    }
 };
-exports.State = State;
+exports.ApiController = ApiController;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", Number)
-], State.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], State.prototype, "name", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => college_entity_1.College, (college) => college.state),
-    __metadata("design:type", Array)
-], State.prototype, "colleges", void 0);
-exports.State = State = __decorate([
-    (0, typeorm_1.Entity)()
-], State);
-//# sourceMappingURL=state.entity.js.map
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", String)
+], ApiController.prototype, "getApiStatus", null);
+exports.ApiController = ApiController = __decorate([
+    (0, common_1.Controller)('api')
+], ApiController);
+//# sourceMappingURL=ApiController.js.map

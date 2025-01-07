@@ -17,13 +17,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const college_placement_entity_1 = require("../entities/college-placement.entity");
+const swagger_1 = require("@nestjs/swagger");
 let CollegePlacementService = class CollegePlacementService {
-    getAvgPlacementDataByCollege(collegeId) {
-        throw new Error('Method not implemented.');
-    }
-    getCollegePlacementsWithTrend(collegeId) {
-        throw new Error('Method not implemented.');
-    }
     constructor(collegePlacementRepository) {
         this.collegePlacementRepository = collegePlacementRepository;
     }
@@ -82,6 +77,65 @@ let CollegePlacementService = class CollegePlacementService {
     }
 };
 exports.CollegePlacementService = CollegePlacementService;
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get average placement data for a college',
+        description: 'Returns the average placement data (highest, average, median placements, and placement rate) for the specified college.',
+    }),
+    (0, swagger_1.ApiParam)({ name: 'collegeId', description: 'The ID of the college' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Average placement data retrieved successfully.',
+        type: Object,
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CollegePlacementService.prototype, "getAverageData", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get all placement records for a college',
+        description: 'Returns all placement records for the specified college, ordered by year.',
+    }),
+    (0, swagger_1.ApiParam)({ name: 'collegeId', description: 'The ID of the college' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Placement records retrieved successfully.',
+        type: [college_placement_entity_1.CollegePlacement],
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CollegePlacementService.prototype, "getPlacements", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Calculate placement trend for a college',
+        description: 'Calculates the placement trend (UP or DOWN) based on the placement rates of the last two years for the specified college.',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Placement trend calculated successfully.',
+        type: String,
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], CollegePlacementService.prototype, "calculatePlacementTrend", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get combined placement data for a college',
+        description: 'Returns average placement data, all placement records, and the placement trend for the specified college.',
+    }),
+    (0, swagger_1.ApiParam)({ name: 'collegeId', description: 'The ID of the college' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Combined placement data retrieved successfully.',
+        type: Object,
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CollegePlacementService.prototype, "getCollegeData", null);
 exports.CollegePlacementService = CollegePlacementService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(college_placement_entity_1.CollegePlacement)),

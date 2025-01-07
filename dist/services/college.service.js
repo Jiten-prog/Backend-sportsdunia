@@ -19,6 +19,7 @@ const typeorm_2 = require("typeorm");
 const college_entity_1 = require("../entities/college.entity");
 const city_entity_1 = require("../entities/city.entity");
 const state_entity_1 = require("../entities/state.entity");
+const swagger_1 = require("@nestjs/swagger");
 let CollegeService = class CollegeService {
     constructor(collegeRepository, cityRepository, stateRepository) {
         this.collegeRepository = collegeRepository;
@@ -40,6 +41,22 @@ let CollegeService = class CollegeService {
     }
 };
 exports.CollegeService = CollegeService;
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get colleges by city and state',
+        description: 'Fetch colleges filtered by city_id and/or state_id.',
+    }),
+    (0, swagger_1.ApiQuery)({ name: 'cityId', required: false, description: 'Filter by city ID' }),
+    (0, swagger_1.ApiQuery)({ name: 'stateId', required: false, description: 'Filter by state ID' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Colleges retrieved successfully.',
+        type: [college_entity_1.College],
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Promise)
+], CollegeService.prototype, "getCollegesByCityAndState", null);
 exports.CollegeService = CollegeService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(college_entity_1.College)),

@@ -1,7 +1,5 @@
-// src/entities/state.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { College } from './college.entity';
-
 
 @Entity()
 export class State {
@@ -11,6 +9,6 @@ export class State {
   @Column()
   name: string;
 
-  @OneToMany(() => College, college => college.state)
+  @OneToMany(() => College, (college) => college.state)
   colleges: College[];
 }

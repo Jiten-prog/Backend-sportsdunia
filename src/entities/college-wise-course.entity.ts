@@ -1,4 +1,3 @@
-// src/entities/college-wise-course.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { College } from './college.entity';
 
@@ -7,7 +6,7 @@ export class CollegeWiseCourse {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => College, college => college.collegeWiseCourses)
+  @ManyToOne(() => College, (college) => college.collegeWiseCourses)
   college: College;
 
   @Column()
@@ -15,6 +14,4 @@ export class CollegeWiseCourse {
 
   @Column()
   course_fee: number;
-
-  // other fields if any
 }

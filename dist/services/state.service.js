@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const state_entity_1 = require("../entities/state.entity");
+const swagger_1 = require("@nestjs/swagger");
 let StateService = class StateService {
     constructor(stateRepository) {
         this.stateRepository = stateRepository;
@@ -26,6 +27,20 @@ let StateService = class StateService {
     }
 };
 exports.StateService = StateService;
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get all states',
+        description: 'Fetches a list of all states from the database.',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'States retrieved successfully.',
+        type: [state_entity_1.State],
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], StateService.prototype, "getAllStates", null);
 exports.StateService = StateService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(state_entity_1.State)),

@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const college_wise_course_entity_1 = require("../entities/college-wise-course.entity");
+const swagger_1 = require("@nestjs/swagger");
 let CollegeWiseCourseService = class CollegeWiseCourseService {
     constructor(collegeWiseCourseRepository) {
         this.collegeWiseCourseRepository = collegeWiseCourseRepository;
@@ -29,6 +30,21 @@ let CollegeWiseCourseService = class CollegeWiseCourseService {
     }
 };
 exports.CollegeWiseCourseService = CollegeWiseCourseService;
+__decorate([
+    (0, swagger_1.ApiOperation)({
+        summary: 'Get courses offered by a specific college',
+        description: 'Fetch all courses for a college, sorted by course fee in descending order.',
+    }),
+    (0, swagger_1.ApiParam)({ name: 'collegeId', description: 'The ID of the college for which courses are being fetched' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Courses retrieved successfully.',
+        type: [college_wise_course_entity_1.CollegeWiseCourse],
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CollegeWiseCourseService.prototype, "getCoursesByCollege", null);
 exports.CollegeWiseCourseService = CollegeWiseCourseService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(college_wise_course_entity_1.CollegeWiseCourse)),

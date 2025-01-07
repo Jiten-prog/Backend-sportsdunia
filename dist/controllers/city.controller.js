@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CityController = void 0;
 const common_1 = require("@nestjs/common");
 const city_service_1 = require("../services/city.service");
+const swagger_1 = require("@nestjs/swagger");
+const city_entity_1 = require("../entities/city.entity");
 let CityController = class CityController {
     constructor(cityService) {
         this.cityService = cityService;
@@ -23,11 +25,15 @@ let CityController = class CityController {
 exports.CityController = CityController;
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all cities' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of cities retrieved successfully', type: [city_entity_1.City] }),
+    (0, swagger_1.ApiResponse)({ status: 500, description: 'Internal server error' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], CityController.prototype, "getCities", null);
 exports.CityController = CityController = __decorate([
+    (0, swagger_1.ApiTags)('Cities'),
     (0, common_1.Controller)('cities'),
     __metadata("design:paramtypes", [city_service_1.CityService])
 ], CityController);

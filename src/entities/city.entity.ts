@@ -1,4 +1,3 @@
-// src/entities/city.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { College } from './college.entity';
 

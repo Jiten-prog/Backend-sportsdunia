@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CollegeController = void 0;
 const common_1 = require("@nestjs/common");
 const college_service_1 = require("../services/college.service");
+const swagger_1 = require("@nestjs/swagger");
+const college_entity_1 = require("../entities/college.entity");
 let CollegeController = class CollegeController {
     constructor(collegeService) {
         this.collegeService = collegeService;
@@ -26,6 +28,22 @@ let CollegeController = class CollegeController {
 exports.CollegeController = CollegeController;
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiOperation)({
+        summary: 'Filter colleges by cityId and stateId',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Colleges retrieved successfully',
+        type: [college_entity_1.College],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'No colleges found for the given city or state',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'Internal server error',
+    }),
     __param(0, (0, common_1.Query)('cityId')),
     __param(1, (0, common_1.Query)('stateId')),
     __metadata("design:type", Function),
@@ -33,6 +51,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], CollegeController.prototype, "getCollegesByCityAndState", null);
 exports.CollegeController = CollegeController = __decorate([
+    (0, swagger_1.ApiTags)('Colleges'),
     (0, common_1.Controller)('colleges'),
     __metadata("design:paramtypes", [college_service_1.CollegeService])
 ], CollegeController);

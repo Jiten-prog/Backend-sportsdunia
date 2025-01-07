@@ -5,29 +5,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppService = void 0;
+exports.SwaggerConfigService = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
-let AppService = class AppService {
-    getHello() {
-        return 'Hello World!';
+let SwaggerConfigService = class SwaggerConfigService {
+    setupSwagger(app) {
+        const options = new swagger_1.DocumentBuilder()
+            .setTitle('Sportsdunia API')
+            .setDescription('API documentation for Sportsdunia platform')
+            .setVersion('1.0')
+            .addBearerAuth()
+            .build();
+        const document = swagger_1.SwaggerModule.createDocument(app, options);
+        swagger_1.SwaggerModule.setup('api-docs', app, document);
     }
 };
-exports.AppService = AppService;
-__decorate([
-    (0, swagger_1.ApiOperation)({
-        summary: 'Get Hello message',
-        description: 'This endpoint returns a simple "Hello World!" message.',
-    }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppService.prototype, "getHello", null);
-exports.AppService = AppService = __decorate([
+exports.SwaggerConfigService = SwaggerConfigService;
+exports.SwaggerConfigService = SwaggerConfigService = __decorate([
     (0, common_1.Injectable)()
-], AppService);
-//# sourceMappingURL=app.service.js.map
+], SwaggerConfigService);
+//# sourceMappingURL=swagger-config.service.js.map

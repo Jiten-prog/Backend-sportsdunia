@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CollegePlacementController = void 0;
 const common_1 = require("@nestjs/common");
 const college_placement_service_1 = require("../services/college-placement.service");
+const swagger_1 = require("@nestjs/swagger");
+const college_placement_entity_1 = require("../entities/college-placement.entity");
 let CollegePlacementController = class CollegePlacementController {
     constructor(collegePlacementService) {
         this.collegePlacementService = collegePlacementService;
@@ -27,12 +29,27 @@ let CollegePlacementController = class CollegePlacementController {
 exports.CollegePlacementController = CollegePlacementController;
 __decorate([
     (0, common_1.Get)(':collegeId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get college placement data by college ID' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'College placement data retrieved successfully',
+        type: college_placement_entity_1.CollegePlacement,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'College not found',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'Internal server error',
+    }),
     __param(0, (0, common_1.Param)('collegeId')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CollegePlacementController.prototype, "getCollegeData", null);
 exports.CollegePlacementController = CollegePlacementController = __decorate([
+    (0, swagger_1.ApiTags)('College Placements'),
     (0, common_1.Controller)('college_data'),
     __metadata("design:paramtypes", [college_placement_service_1.CollegePlacementService])
 ], CollegePlacementController);

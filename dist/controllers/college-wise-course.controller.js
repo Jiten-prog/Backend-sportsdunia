@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CollegeWiseCourseController = void 0;
 const common_1 = require("@nestjs/common");
 const college_wise_course_service_1 = require("../services/college-wise-course.service");
+const swagger_1 = require("@nestjs/swagger");
+const college_wise_course_entity_1 = require("../entities/college-wise-course.entity");
 let CollegeWiseCourseController = class CollegeWiseCourseController {
     constructor(collegeWiseCourseService) {
         this.collegeWiseCourseService = collegeWiseCourseService;
@@ -26,12 +28,27 @@ let CollegeWiseCourseController = class CollegeWiseCourseController {
 exports.CollegeWiseCourseController = CollegeWiseCourseController;
 __decorate([
     (0, common_1.Get)(':college_id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all courses for a specific college, sorted by course fee' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Courses retrieved successfully',
+        type: [college_wise_course_entity_1.CollegeWiseCourse],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'College not found',
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 500,
+        description: 'Internal server error',
+    }),
     __param(0, (0, common_1.Param)('college_id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CollegeWiseCourseController.prototype, "getCollegeCourses", null);
 exports.CollegeWiseCourseController = CollegeWiseCourseController = __decorate([
+    (0, swagger_1.ApiTags)('College Courses'),
     (0, common_1.Controller)('college_courses'),
     __metadata("design:paramtypes", [college_wise_course_service_1.CollegeWiseCourseService])
 ], CollegeWiseCourseController);

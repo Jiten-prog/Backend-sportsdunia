@@ -20,7 +20,7 @@ __decorate([
     __metadata("design:type", Number)
 ], CollegeWiseCourse.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => college_entity_1.College, college => college.collegeWiseCourses),
+    (0, typeorm_1.ManyToOne)(() => college_entity_1.College, (college) => college.collegeWiseCourses),
     __metadata("design:type", college_entity_1.College)
 ], CollegeWiseCourse.prototype, "college", void 0);
 __decorate([
