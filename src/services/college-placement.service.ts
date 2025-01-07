@@ -6,6 +6,12 @@ import { CollegePlacement } from '../entities/college-placement.entity';
 
 @Injectable()
 export class CollegePlacementService {
+  getAvgPlacementDataByCollege(collegeId: number) {
+    throw new Error('Method not implemented.');
+  }
+  getCollegePlacementsWithTrend(collegeId: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(CollegePlacement)
     private collegePlacementRepository: Repository<CollegePlacement>,

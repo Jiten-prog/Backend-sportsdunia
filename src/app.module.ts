@@ -8,25 +8,20 @@ import { State } from './entities/state.entity';
 import { CollegeController } from './controllers/college.controller';
 import { CollegePlacementController } from './controllers/college-placement.controller';
 import { CollegeWiseCourseController } from './controllers/college-wise-course.controller';
-import { CityController } from './controllers/city.controller';  // Add CityController
-import { StateController } from './controllers/state.controller';  // Add StateController
 import { CollegeService } from './services/college.service';
 import { CollegePlacementService } from './services/college-placement.service';
 import { CollegeWiseCourseService } from './services/college-wise-course.service';
-import { CityService } from './services/city.service';  // Add CityService
-import { StateService } from './services/state.service';  // Add StateService
+import * as dotenv from 'dotenv';
+dotenv.config();  // Load the environment variables from .env file
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'Postgrepass@123',
-      database: 'college_db',
+      url: process.env.DATABASE_URL,  // Your DATABASE_URL from .env
+      ssl: true,  // Always enable SSL
       entities: [College, CollegePlacement, CollegeWiseCourse, City, State],
-      synchronize: true, // Warning: don't use in production
+      synchronize: false,  // Be careful with synchronize, don't use it in production
     }),
     TypeOrmModule.forFeature([College, CollegePlacement, CollegeWiseCourse, City, State]),
   ],
@@ -34,15 +29,15 @@ import { StateService } from './services/state.service';  // Add StateService
     CollegeController,
     CollegePlacementController,
     CollegeWiseCourseController,
-    CityController,  // Add CityController
-    StateController,  // Add StateController
   ],
   providers: [
     CollegeService,
     CollegePlacementService,
     CollegeWiseCourseService,
-    CityService,  // Add CityService
-    StateService,  // Add StateService
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    console.log('Database URL:', process.env.DATABASE_URL);  // Log to verify the database URL
+  }
+}
